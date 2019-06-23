@@ -220,8 +220,9 @@
 		float: left;
 	}
 	.tm-banner-text {	
-		transition-duration: 30s;
-		transform: rotateY(3600deg);
+		transition-duration: 3s;
+		transform: rotateY(360deg);
 		transition-property: transform;
+		transition-timing-function: linear;
 	}
 }
