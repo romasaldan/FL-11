@@ -88,7 +88,7 @@
 		color: #0275D8;
 	}
 }
-@media screen {
+@media not print {
 	#about h2:nth-child(odd):hover {
 		background-color: lightskyblue;
 		color: white;
