@@ -69,6 +69,11 @@
 	.tm-banner {
 		padding: 0px;
 	}
+	.tm-banner-inner {
+		
+		margin-right: 10px;
+		margin-left: 10px;
+	}
 	.carousel {
 		padding: 20px;
 		padding-bottom: 0px;
@@ -99,7 +104,7 @@
 		background-color: #76cdd7;
 	}
 	p.tm-banner-text {
-		text-shadow: 0px 8px 1px #76cdd7;
+		text-shadow: 0px 8px 0px #76cdd7;
 		letter-spacing: 2px;
 		word-spacing: 7px;
 	}
@@ -110,7 +115,7 @@
 			content: '';
 			width: 0px;
 			height: 0px;	
-			border-top: 50px solid #76cdd7;
+			border-top: 50px solid #87CEFA;
 			border-right: 50px solid transparent;
 
 	}
@@ -161,7 +166,7 @@
 	.box-work:nth-child(even) {
 		background-color: #F2F2F2;
 	}
-	#contact .contact-form input,#contact {
+	#contact .contact-form input {
 		border: 0px solid;
 		border-bottom: 2px solid #76CDD7;	
 	}
@@ -208,10 +213,10 @@
 	}
 	#home+section .tm-team-img {
 		float: right;
-		width: 70%;
+		width: 67%;
 	}
 	#home+section .tm-team-description-container {
-		width: 30%;
+		width: 33%;
 		float: left;
 	}
 	.tm-banner-text {	
