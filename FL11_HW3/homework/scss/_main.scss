@@ -11,12 +11,10 @@ header {
 	background-position: -70px -150px;
 	font-family: 'Hind', sans-serif;
 	background-repeat: no-repeat;
-	
 	height: 750px;
 	padding-left: 120px;
 	color: $textColorOfHeader;
 	border-radius:0px 0px 300px/200px 0px;
-
 }
 .header_text {
 	width: 650px;
@@ -34,7 +32,6 @@ header {
 	height: 40px;
 	color: white;
 }
-
 .header_heading {
 	clear: left;
 	margin-top: 125px;
@@ -57,29 +54,29 @@ header {
 		bottom: 15px;
 	}
 }
-	.landing-logo {
-		width: 135px;
-		padding-top: 30px;
-		font-family: $textFont;
-		img {
-			float: left;
-		}
-		p {
-			float: right;
-			line-height: 1.2;
-			font-size: map-get($font-size, "bigger");;
-			margin: 0px;
-			width: 75px;
+.landing-logo {
+	width: 135px;
+	padding-top: 30px;
+	font-family: $textFont;
+	img {
+		float: left;
+	}
+	p {
+		float: right;
+		line-height: 1.2;
+		font-size: map-get($font-size, "bigger");;
+		margin: 0px;
+		width: 75px;
 
-			text-align: center;
-			font-weight: bold;
-			span {
-				font-size: map-get($font-size, "smallest");;
-				font-weight: lighter;
-				display: block;
-			}
+		text-align: center;
+		font-weight: bold;
+		span {
+			font-size: map-get($font-size, "smallest");;
+			font-weight: lighter;
+			display: block;
 		}
 	}
+}
 main {
 	position: relative;
 }
@@ -163,7 +160,6 @@ main {
 					@include centerUnderline(87px);
 				}
 		}
-		
 		.section_card_underline {
 			position: absolute;
 			top: 263px;
@@ -172,8 +168,6 @@ main {
 			display: block;
 			height: 10px;
 		}
-
-
 	}
 }
 .section_banner {
@@ -185,7 +179,6 @@ main {
 	width: 63%;
 	height: 120px;
 	border-radius: 6px;
-	
 	.section_banner_text_wrap {
 		width: 60%;
 		height: 100px;
@@ -218,8 +211,6 @@ main {
 		@extend .header_button;
 		margin-top: 40px;
 		margin-left: 35px;
-		
-		
 	}
 }
 footer {
@@ -250,6 +241,5 @@ footer {
 		.footer-cr {
 			font-size: map-get($font-size, "smaller");;
 		}
-		
 	}
 }
