@@ -175,7 +175,7 @@ main {
         width: 53px;
         position: absolute;
         left: 106px;
-        top: 17px;
+        top: 15px;
         z-index: -1; }
   .section_banner .section_banner_button {
     margin-top: 40px;
@@ -185,7 +185,8 @@ footer {
   margin-top: 40px;
   background-color: #21232E;
   padding-top: 110px;
-  height: 90px; }
+  height: 90px;
+  font-family: "Source Sans Pro", sans-serif; }
   footer .footer-wrap {
     width: 100%;
     height: 90px; }
