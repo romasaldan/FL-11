@@ -1,3 +1,4 @@
+/*colors*/
 .post-1 {
 	background: #B71757;
 	color: #DE96B3;
@@ -18,6 +19,7 @@
 	background: #2d95bb;
 	color: #9ECEDF;
 }
+/*color*/
 body {
 	margin-left: auto;
 	margin-right: auto;
@@ -28,16 +30,16 @@ body {
 	width: 100%;
 	max-width: 1400px;
 }
+/*header start*/
 header,main,footer {
 	width: 100%;
 }
 header {
 	background-color: #162B4D;
 	height: 120px;
-	display: -webkit-box;
-	display: -ms-flexbox;
 	display: flex;
 }
+/*nav*/
 .gamburder {
 	display: none;
 }
@@ -46,8 +48,6 @@ header h1 {
 	padding-left: 15px;
 	width: 65%;
 	height: 100%;
-	display: -webkit-box;
-	display: -ms-flexbox;
 	display: flex;
 	align-content: center;
 	align-items: center;
@@ -55,8 +55,6 @@ header h1 {
 header nav {
 	width: 35%;
 	height: auto;
-	display: -webkit-box;
-	display: -ms-flexbox;
 	display: flex;
 	font-size: 24px;
 	margin-right: 5%;
@@ -69,8 +67,6 @@ header nav .nav-item {
 .nav-item a {
 	color: white;
 	text-decoration: none;
-	display: -webkit-box;
-	display: -ms-flexbox;
 	display: flex;
 	width: 100%;
 	height: 100%;
@@ -80,6 +76,8 @@ header nav .nav-item {
 nav .nav-item:hover {
 	background-color:  #283D5F;
 }
+/*nav*/
+/*logo*/
 header h1 {
 
 	font-weight: 100;
@@ -87,16 +85,16 @@ header h1 {
 .pink {
 	color: #d12767;
 }	
+/*logo*/
+/*header finish*/
+/*main start*/
 main {
 	padding-top: 25px;
-	display: -webkit-box;
-	display: -ms-flexbox;
 	display: flex;
 	justify-content: space-between;
 }
+/*left part of main*/
 section{
-	display: -webkit-box;
-	display: -ms-flexbox;
 	display: flex;
 	width: 75%;
 	flex-direction: column;
@@ -118,8 +116,6 @@ section{
 	height: 100%;
 }
 .post {
-	display: -webkit-box;
-	display: -ms-flexbox;
 	display: flex;
 }
 .post:nth-child(even) {
@@ -170,7 +166,8 @@ p.description  {
 	font-size: 42px;
 	text-decoration: none;
 }
-
+/*left part of main*/
+/*hover effects*/
 .hover-1,.hover-2,.hover-3,.hover-4 {
 	width: 100%;
 	height: 100%;
@@ -223,6 +220,8 @@ p.description  {
 .post-5 .wrapper-descriptions h2 a:hover {
 	color: #9ECEDF;
 }
+/*hover effects*/
+/*replaced date*/
 .day {
 	padding-top: 7%;
 	font-size: 42px;
@@ -255,6 +254,8 @@ p.description  {
 .post-5 .time {
 	color : #6BB4CF ;
 }
+/*replaced date*/
+/*aside*/
 aside {
 	width: 23%;
 }
@@ -282,6 +283,9 @@ aside img {
 .aside-content-section {
 	margin-bottom: 20px;
 }
+/*aside*/
+/*main finish*/
+/*footer start*/
 footer {
 	background-color: #162B4D;
 	color: #547689;
@@ -310,7 +314,9 @@ footer .author {
 	display: block;
 	padding-top: 58px;
 }
+/*ffoter finish*/
 @media only screen and (max-device-width: 1400px) {
+/*	for width of device between 769px and 1400px*/
 	header 	nav {
 		font-size: 16px;
 	}
@@ -342,6 +348,7 @@ footer .author {
 	}
 }
 @media only screen and (max-device-width: 768px)  {
+	/*	for width of device between 481px and 768px*/
 	header nav {
 		display: none;
 	}
@@ -360,8 +367,6 @@ footer .author {
 		margin-right: auto;
 		width: 15px;
 		height: 15px;
-		display: -webkit-box;
-		display: -ms-flexbox;
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
@@ -402,7 +407,6 @@ footer .author {
 		padding-top: 10%;
 		padding-left: 5%;
 		padding-right: 5%;
-		-webkit-box-sizing: border-box;
 		box-sizing: border-box;
 		text-align: left;
 		height: 55%;
@@ -435,7 +439,6 @@ footer .author {
 		padding-top: 10%;
 		padding-left: 5%;
 		padding-right: 5%;
-		-webkit-box-sizing: border-box;
 		box-sizing: border-box;
 		height: 55%;
 	}
@@ -475,6 +478,7 @@ footer .author {
 
 }
 @media only screen and (max-device-width: 480px) {
+	/*	for width of device less than 481px*/
 	body {
 		width: 100%;
 		font-weight: 100;
