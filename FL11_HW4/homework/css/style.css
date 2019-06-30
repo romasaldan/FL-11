@@ -304,6 +304,10 @@ footer {
 .foot-nav-list-item {
 	text-align: right;
 }
+.foot-nav-list-item a {
+	color: black;
+	text-decoration:none; 
+}
 .bolder {
 	font-weight: 900;
 }
