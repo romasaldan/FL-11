@@ -320,7 +320,7 @@ footer .author {
 	header 	nav {
 		font-size: 16px;
 	}
-	.wrapper-descriptions  h2 {
+	.wrapper-descriptions  h2 a{
 		font-size: 28px;
 	}
 	p.description {
@@ -331,7 +331,7 @@ footer .author {
 		padding-left: 5%;
 	}
 	.post:nth-child(odd)  .time {
-		width: 12%;
+		width: 9%;
 
 	}
 	.day {
@@ -342,6 +342,9 @@ footer .author {
 	}
 	.news-text h3 {
 		font-size: 26px;
+	}
+	.post-text .time{
+		font-weight: 300;
 	}
 	.news-text p {
 		line-height: 20px;
