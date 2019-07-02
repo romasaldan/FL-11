@@ -180,13 +180,24 @@ p.description  {
 }
 /*left part of main*/
 /*hover effects*/
-.hover-1,.hover-2,.hover-3,.hover-4 {
+.hover-1,
+.hover-2,
+.hover-3,
+.hover-4 {
 	width: 100%;
 	height: 100%;
 	visibility: hidden;
 	opacity: 0;
 }
-.post-1 .content-section:first-child,.post-2 .content-section:first-child,.post-3 .content-section:first-child,.post-4 .content-section:first-child,.post-1 .wrapper-descriptions h2 a:hover,.post-2 .wrapper-descriptions h2 a:hover,.post-3 .wrapper-descriptions h2 a:hover,.post-4 .wrapper-descriptions h2 a:hover,.post-5 .wrapper-descriptions h2 a:hover {
+.post-1 .content-section:first-child,
+.post-2 .content-section:first-child,
+.post-3 .content-section:first-child,
+.post-4 .content-section:first-child,
+.post-1 .wrapper-descriptions h2 a:hover,
+.post-2 .wrapper-descriptions h2 a:hover,
+.post-3 .wrapper-descriptions h2 a:hover,
+.post-4 .wrapper-descriptions h2 a:hover,
+.post-5 .wrapper-descriptions h2 a:hover {
 	transition-duration: 1s;
 	transition-property: opacity,color;
 }    
@@ -202,10 +213,16 @@ p.description  {
 .post-4 .hover-4 {
 	background-color:  #d12767;
 }
-.hover-1:hover,.hover-2:hover,.hover-3:hover,.hover-4:hover {
+.hover-1:hover,
+.hover-2:hover,
+.hover-3:hover,
+.hover-4:hover {
 	opacity: 1;
 }
-.post-1 .content-section:first-child:hover,.post-2 .content-section:first-child:hover,.post-3 .content-section:first-child:hover,.post-4 .content-section:first-child:hover {
+.post-1 .content-section:first-child:hover,
+.post-2 .content-section:first-child:hover,
+.post-3 .content-section:first-child:hover,
+.post-4 .content-section:first-child:hover {
 	opacity: 0.5;
 }
 .post-1 .wrapper-descriptions h2 a:hover {
