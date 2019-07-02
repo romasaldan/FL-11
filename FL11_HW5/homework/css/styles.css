@@ -73,6 +73,7 @@ header nav .nav-item {
 	height: 100%;
 	width: 25%;
 	transition-duration: 1s;
+	transition-property: background-color;
 }
 .nav-item a {
 
@@ -187,6 +188,7 @@ p.description  {
 }
 .post-1 .content-section:first-child,.post-2 .content-section:first-child,.post-3 .content-section:first-child,.post-4 .content-section:first-child,.post-1 .wrapper-descriptions h2 a:hover,.post-2 .wrapper-descriptions h2 a:hover,.post-3 .wrapper-descriptions h2 a:hover,.post-4 .wrapper-descriptions h2 a:hover,.post-5 .wrapper-descriptions h2 a:hover {
 	transition-duration: 1s;
+	transition-property: opacity,color;
 }    
 .post-1 .hover-1 {
 	background-color: #B71757;	
