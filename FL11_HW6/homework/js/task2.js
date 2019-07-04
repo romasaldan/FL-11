@@ -1,23 +1,31 @@
-let a= +prompt('enter a',0);
-let b= +prompt('enter b',0); 
-let c= +prompt('enter c',0); 
-let aCondition = a>0;
-let bCondition = b>0;
-let cCondition = c>0;
-let abCondition = a+b>c;
-let acCondition = a+c>b;
-let bcCondition = c+b>a;
-if (!(abCondition&&acCondition&&bcCondition&&aCondition&&bCondition&&cCondition)) {
-	console.log('Triangle doesn’t exist');
-} else {
+let a = +prompt('enter a',0);
+if (Number.isNaN(a)) {
+	console.log('You have not entered number for a');
+} else if (a<0) {
+	console.log('length of side a must be positive');
+}
+let b = +prompt('enter b',0); 
+if (Number.isNaN(b)) {
+	console.log('You have not entered number for b')
+} else if (b<0) {
+	console.log('length of side b must be positive');
+}
+
+let c = +prompt('enter c',0); 
+if (Number.isNaN(c)) {
+	console.log('You have not entered number for c')
+} else if (c<0) {
+	console.log('length of side c must be positive');
+}
+if (a>0&&a>0&&c>0&&a+b>c&&a+c>b&&c+b>a) {
 	let amountOfEqualSides = 0;
-	if (a===b) {
+	if(a===b) {
 		amountOfEqualSides++;
 	}
-	if (a===c) {
+	if(a===c) {
 		amountOfEqualSides++;
 	}
-	if (b===c) {
+	if(b===c) {
 		amountOfEqualSides++;
 	}
 	const AMOUNT_OF_EQUAL_SIDES_IN_NORMAL_TRIANGLE = 0; 
@@ -34,5 +42,7 @@ if (!(abCondition&&acCondition&&bcCondition&&aCondition&&bCondition&&cCondition)
 			console.log('Eequivalent triangle');
 			break;
 		default:	
-	}
+	}	
+} else {
+	console.log('Triangle doesn’t exist');
 }
