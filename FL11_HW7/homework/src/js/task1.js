@@ -1,4 +1,3 @@
-// Your code goes here
 let email = prompt('enter your email');
 const MIN_LENGTH_OF_EMAIL = 6;
 const MIN_LENGTH_OF_PASSWORD = 5;
