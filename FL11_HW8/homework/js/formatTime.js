@@ -7,4 +7,6 @@ function formatTime(a) {
 	let minutes = minutesWithoutDays - hours*amountOfMinutesInHour;
 	return days+' day(s) '+hours+' hour(s) '+minutes+'minute(s).'
 }
-console.log(formatTime(2000))
+console.log(formatTime(3601));
+console.log(formatTime(59));
+console.log(formatTime(120));
