@@ -123,7 +123,9 @@ function getAmountOfAdultPeople (arrOfPeople) {
 	for (let i =0;i<arrOfPeople.length;i++) {
 		let birthdayOfPerson = new Date(arrOfPeople[i][' birthday ']);		
 		let diffDays = daysBetween(today,birthdayOfPerson);
-		if (diffDays/365>18) {
+		const DAY_IN_YEAR = 365;
+		const LIMIT_YEARS =18;
+		if (diffDays/DAY_IN_YEAR>LIMIT_YEARS) {
 			amountOfPeopleWhoAreOver18++;
 		}
 	}
@@ -131,37 +133,62 @@ function getAmountOfAdultPeople (arrOfPeople) {
 }
 const ARRAY_OF_PEOPLE = [
   {
-    "_id": "5b5e3168c6bf40f2c1235cd6",
-    "index": 0,
-    " birthday ": '2016-03-18T00:00:00',
-    "eyeColor": "green",
-    "name": "Stein",
-    "favoriteFruit": "apple"
+    '_id': '5b5e3168c6bf40f2c1235cd6',
+    'index': 0,
+    ' birthday ': '2016-03-18T00:00:00',
+    'eyeColor': 'green',
+    'name': 'Stein',
+    'favoriteFruit': 'apple'
   },
   {
-    "_id": "5b5e3168e328c0d72e4f27d8",
-    "index": 1,
-    " birthday ": '1991-02-11T00:00:00',
-    "eyeColor": "blue",
-    "name": "Cortez",
-    "favoriteFruit": "strawberry"
+    '_id': '5b5e3168e328c0d72e4f27d8',
+    'index': 1,
+    ' birthday ': '1991-02-11T00:00:00',
+    'eyeColor': 'blue',
+    'name': 'Cortez',
+    'favoriteFruit': 'strawberry'
   },
   {
-    "_id": "5b5e3168cc79132b631c666a",
-    "index": 2,
-    " birthday ": '1984-04-17T00:00:00',
-    "eyeColor": "blue",
-    "name": "Suzette",
-    "favoriteFruit": "apple"
+    '_id': '5b5e3168cc79132b631c666a',
+    'index': 2,
+    ' birthday ': '1984-04-17T00:00:00',
+    'eyeColor': 'blue',
+    'name': 'Suzette',
+    'favoriteFruit': 'apple'
   },
   {
-    "_id": "5b5e31682093adcc6cd0dde5",
-    "index": 3,
-    " birthday ": '1994-04-17T00:00:00',
-    "eyeColor": "green",
-    "name": "George",
-    "favoriteFruit": "banana"
+    '_id': '5b5e31682093adcc6cd0dde5',
+    'index': 3,
+    ' birthday ': '1994-04-17T00:00:00',
+    'eyeColor': 'green',
+    'name': 'George',
+    'favoriteFruit': 'banana'
   }
 ];
 console.log(getAmountOfAdultPeople(ARRAY_OF_PEOPLE))
 //9
+function keys(obj) {
+	let arrayOfKeys = [];
+	let count = 0;
+	for (let prop in obj) {
+		if (obj.hasOwnProperty(prop)) {
+			arrayOfKeys[count] = prop;
+			count++;
+		}
+	}
+	return arrayOfKeys;
+}
+console.log(keys({keyOne: 1, keyTwo: 2, keyThree: 3}))
+//10
+function values (obj) {
+	let arrayOfKeys = [];
+	let count = 0;
+	for (let prop in obj) {
+		if (obj.hasOwnProperty(prop)) {		
+			arrayOfKeys[count]=obj[prop];
+			count++;
+		}
+	}
+	return arrayOfKeys;
+}
+console.log(values({keyOne: 1, keyTwo: 2, keyThree: 3}))
