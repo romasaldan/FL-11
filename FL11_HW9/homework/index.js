@@ -37,24 +37,26 @@ executeforEach([0,1,1], function(el) {
 }); 
 //3
 function mapArray(array,functionForExecuting) {
-	let  newArray = []; 
+	let newArray =[]; 
 	executeforEach(array,function(el) {
 		newArray.push(functionForExecuting(el))
 	})
 	return newArray;
 }
 console.log(mapArray([0, 1, 1], function(el) {
-	return el + 3; 
+	return el + 1; 
 })) 
 //4
 function filterArray(array,functionForExecuting) {
-	let  newArray = [];
-	
+	let newArray = [];
 	executeforEach(array,function(el) {
-		newArray.push(functionForExecuting(el))
+		if (functionForExecuting(el)) {
+			newArray.push(el);
+		}
 	})
 	return newArray;	
 }
-console.log(filterArray([2, 5, 8], function(el) { 
-	return el > 3; 
+console.log(filterArray([0, 1, 0, 1], function(el) { 
+	return el > 0; 
 }))
+//5
