@@ -70,41 +70,64 @@ function showFormattedDate(date) {
 console.log(showFormattedDate(new Date('2019-01-27T01:10:00')))
 console.log(showFormattedDate(new Date()))
 //6/
-function canConvertToDate(str) {
+function canConvertToDate(string) {
 //	I suppose input string will be entered in format YYYY-MM-DDTHH:MM:SS and every value is not negative
-//	const POSITION_OF_DIVIDERS = [4,7,10,13,16,19];
-//	let year = parseInt(string.slice(0,POSITION_OF_DIVIDERS[0]));
-//	let month = parseInt(string.slice(POSITION_OF_DIVIDERS[0]+1,POSITION_OF_DIVIDERS[1]));
-//	let day = parseInt(string.slice(POSITION_OF_DIVIDERS[1]+1,POSITION_OF_DIVIDERS[2]));
-//	let hours = parseInt(string.slice(POSITION_OF_DIVIDERS[2]+1,POSITION_OF_DIVIDERS[3]));
-//	let minutes = parseInt(string.slice(POSITION_OF_DIVIDERS[3]+1,POSITION_OF_DIVIDERS[4]));
-//	let seconds = parseInt(string.slice(POSITION_OF_DIVIDERS[4]+1,POSITION_OF_DIVIDERS[5]));
-//	const MAX_MONTHES_YEAR =12; 
-//	const MAX_HOURS_DAY = 24; 
-//	const MAX_MINUTES_HOUR = 60; 
-//	const MAX_SECONDS_MINUTE = 60; 
-//	const FEBRUARY_LEAP_YEAR = 29;
-//	const LENGTH_OF_MONTHES = [31,28,31,30,31,30,31,31,30,31,30,31];
-//	if (month>MAX_MONTHES_YEAR-1||hours>MAX_HOURS_DAY-1||minutes>MAX_MINUTES_HOUR-1||seconds>MAX_SECONDS_MINUTE-1) {
-//		return false;
-//	}
-//	if (year%4===0&&month===2&&day===FEBRUARY_LEAP_YEAR) {
-//		return true;
-//	}
-//	for (let i=0;i<LENGTH_OF_MONTHES.length;i++) {
-//		if (month-1===i&&day>LENGTH_OF_MONTHES[i]) {
-//			return false;
-//		}
-//	}
-//	return true;
-	let date = new Date(str)
-	console.log(date)
-	return !(date.toString()==='Invalid Date');
+	let date = string.slice(0,string.indexOf('T')).split('-');
+	let time = string.slice(string.indexOf('T')+1).split(':');
+	for (let i = 0;i<date.length;i++) {
+		date[i] = parseInt(date[i]);
+	}
+	for (let i = 0;i<time.length;i++) {
+		time[i] = parseInt(time[i]);
+	}
+	let year = date[0];
+	let month = date[1];
+	let day = date[date.length-1];
+	let hours = time[0];
+	let minutes = time[1];
+	let seconds = time[time.length-1];
+//  there are lengths of monthes. I set reduced names because eslint require length of lines no more than 120. For instance L_JAN - length of January
+	const L_JAN = 31;
+	const L_FEB = 28;
+	const L_MAR = 31;
+	const L_APR = 30;
+	const L_MAY = 31;
+	const L_JUN = 30;
+	const L_JUL = 31;
+	const L_AUG = 31;
+	const L_SEP = 30;
+	const L_OCT = 31;
+	const L_NOV = 30;
+	const L_DEC = 31;
+	const MAX_MONTHES_YEAR =12; 
+	const MAX_HOURS_DAY = 24; 
+	const MAX_MINUTES_HOUR = 60; 
+	const MAX_SECONDS_MINUTE = 60; 
+	const FEBRUARY_LEAP_YEAR = 29;
+	const LENGTH_OF_MONTHES = [L_JAN,L_FEB,L_MAR,L_APR,L_MAY,L_JUN,L_JUL,L_AUG,L_SEP,L_OCT,L_NOV,L_DEC];
+	if (month>MAX_MONTHES_YEAR||hours>MAX_HOURS_DAY-1||minutes>MAX_MINUTES_HOUR-1||seconds>MAX_SECONDS_MINUTE-1) {
+		return false;
+	}
+// Checking condition when year is leap year and date is 29.02
+	const SEQUENCE_NUMBER_OF_FEBRUARY=2;
+	const FREQUENCY_OF_LEAP_YEARS = 4;
+	if (year%FREQUENCY_OF_LEAP_YEARS===0&&month===SEQUENCE_NUMBER_OF_FEBRUARY&&day===FEBRUARY_LEAP_YEAR) {
+		return true;
+	}
+// checkin condition length of a month for each month separated. Year is not leap year.	
+	for (let i=0;i<LENGTH_OF_MONTHES.length;i++) {
+		if (month-1===i&&day>LENGTH_OF_MONTHES[i]) {
+			return false;
+		}
+	}
+	return true;
+// below is second way to write the function. But it does not work correrctly. For example 29.02.2017 is valid data	
+//	let date = new Date(str)
+//	console.log(date)
+//	return !(date.toString()==='Invalid Date');
 }
-
-console.log(canConvertToDate('2016-13-18T00:00:00'))
-console.log(canConvertToDate('2016-03-18T00:00:00'))
-
+console.log(canConvertToDate('2017-02-29T00:00:00'));
+console.log(canConvertToDate('2016-05-31T00:00:00'));
 //7
 function daysBetween(date1,date2) {
 	let diffTime = Math.abs(date2.getTime()-date1.getTime());
@@ -112,23 +135,35 @@ function daysBetween(date1,date2) {
 	const SECONDS_IN_MINUTE = 60;
 	const MINUTES_IN_HOUR = 60;
 	const HOURS_IN_DAY = 24;
-	let diffDays = Math.ceil(diffTime/(MILISECONDS_IN_SECOND*SECONDS_IN_MINUTE*MINUTES_IN_HOUR*HOURS_IN_DAY));
+	const DOWN_LIMIT_OF_ROUND_TO_UP = 0.5;
+	// calculate ceil value of diffDays. we may not use Math.ceil only Math.round()
+	let diffDays = diffTime/(MILISECONDS_IN_SECOND*SECONDS_IN_MINUTE*MINUTES_IN_HOUR*HOURS_IN_DAY);
+	diffDays = Math.round(diffDays)-diffDays>=DOWN_LIMIT_OF_ROUND_TO_UP ? Math.round(diffDays)-1 : Math.round(diffDays);
 	return diffDays;
 }
 console.log(daysBetween(new Date('2016-03-18T00:00:00'), new Date('2016-04-19T00:00:00')));  
 //8
 function getAmountOfAdultPeople (arrOfPeople) {
 	let today = new Date();
-	let amountOfPeopleWhoAreOver18 = 0; 
+	let arrayOfBirthdays = []; 
+	const LIMIT_YEARS =18;
+	function criterion(el) {
+		return el>LIMIT_YEARS;
+	}
 	for (let i =0;i<arrOfPeople.length;i++) {
 		let birthdayOfPerson = new Date(arrOfPeople[i][' birthday ']);		
 		let diffDays = daysBetween(today,birthdayOfPerson);
-		const DAY_IN_YEAR = 365;
-		const LIMIT_YEARS =18;
-		if (diffDays/DAY_IN_YEAR>LIMIT_YEARS) {
-			amountOfPeopleWhoAreOver18++;
+		const DAY_IN_YEAR = 365;	
+		arrayOfBirthdays[i] = diffDays/DAY_IN_YEAR;
+		// calculate ceil value of arrayOfBirthdays[i]. we may not use Math.ceil only Math.round()
+		const DOWN_LIMIT_OF_ROUND_TO_UP = 0.5;
+		if (arrayOfBirthdays[i]-Math.round(arrayOfBirthdays[i])>=DOWN_LIMIT_OF_ROUND_TO_UP) {
+			arrayOfBirthdays[i]=Math.round(arrayOfBirthdays[i])-1;
+		} else {
+			arrayOfBirthdays[i]=Math.round(arrayOfBirthdays[i]);
 		}
 	}
+	let amountOfPeopleWhoAreOver18 = filterArray(arrayOfBirthdays,criterion).length;
 	return amountOfPeopleWhoAreOver18;
 }
 const ARRAY_OF_PEOPLE = [
