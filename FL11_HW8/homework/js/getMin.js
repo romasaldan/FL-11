@@ -1,5 +1,6 @@
-function getMin () {
+function getMin() {	
 	let min = arguments[0];
+	// I suppose arguments will be numbers. Boolean or string variable are converted to numbers 
 	for(let i=0;i<arguments.length;i++) {
 		if (arguments[i]<min) {
 			min = arguments[i];
