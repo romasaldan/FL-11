@@ -121,10 +121,6 @@ function canConvertToDate(string) {
 		}
 	}
 	return true;
-// below is second way to write the function. But it does not work correrctly. For example 29.02.2017 is valid data	
-//	let date = new Date(str)
-//	console.log(date)
-//	return !(date.toString()==='Invalid Date');
 }
 console.log(canConvertToDate('2017-02-29T00:00:00'));
 console.log(canConvertToDate('2016-05-31T00:00:00'));
