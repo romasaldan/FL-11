@@ -1,0 +1,81 @@
+* {
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+#root {
+	width: 600px;
+	margin-right: auto;
+	margin-left: auto;
+}
+.clear {
+	width: 100%;
+	height: 5px;
+	background-color: #c5e3fd;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+h1 {
+	color: #60C2FE;
+	text-align: center;
+}
+#form-input {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+	-webkit-box-pack:justify;
+	-ms-flex-pack:justify;
+	justify-content:space-between;
+}
+#form-input button {
+	width: 25px;
+	height: 25px;
+	padding: 0px;
+	background-color: #C8D0D8;
+	border: 0px;
+	color: white;
+}
+#form-input button i {
+	font-size: 20px;
+}
+#form-input input {
+	height: 30px;
+	padding: 5px;
+	width: 85%;
+}
+.list {
+	list-style-type: none;
+	padding: 0px;
+	color: #89C4F4;
+}
+.list-item {
+	color: #89C4F4;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-ms-flex-line-pack: justify;
+	-webkit-box-pack: justify;
+	-ms-flex-pack: justify;
+	justify-content: space-between;
+}
+.delete {
+	-ms-flex-item-align: center;
+	align-self: center;
+}
+.list-item input[type=checkbox]{
+	width: 20px;
+	height: 20px;
+	border-radius: 0px;
+	background-color: white;
+	color: white;
+}
+.content {
+	font-size: 24px;
+}
+.left-part {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+}
