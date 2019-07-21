@@ -2,30 +2,7 @@ function Fighter(object) {
 	let fighter = {};
 	let wins = 0;
 	let losses = 0;
-	fighter.name = object.name;
-	fighter.damage = object.damage;
-	fighter.hp = object.hp;
-	fighter.agility = object.agility;
-	this.setName = function (name) {
-		fighter.name = name;
-	}
-	this.addWin = function () {
-		wins++;
-	}
-	this.addLose = function() {
-		losses++;
-	}
-	
-	this.logCombatHistory = function () {
-		console.log('Name: '+this.getName()+', Wins: '+wins+', Losses: '+losses);		
-	}
-	this.setDamage = function(damage) {
-		fighter.damage = damage;
-	}
-	this.setAgility = function(agility) {
-		fighter.agility = agility;
-	}
-	this.setHealth = function(hp) {
+	function setHealth(hp) {
 		const MAX_AMOUNT_OF_HEALTH = 100; 
 		const MIN_AMOUNT_OF_HEALTH = 0; 
 		if (hp>MAX_AMOUNT_OF_HEALTH) {
@@ -36,16 +13,28 @@ function Fighter(object) {
 			fighter.hp = hp;
 		}
 	}
-	this.setDamage = function(damage) {
-		fighter.damage = damage;
-	}
-	this.isAlive = function () {
-		if (this.getHealth()!==0) {
-			return true;
+	function setAgility(agility) {
+		const MAX_AMOUNT_OF_AGILITY = 100; 
+		const MIN_AMOUNT_OF_AGILITY = 0; 
+		if (agility>MAX_AMOUNT_OF_AGILITY) {
+			fighter.agility = MAX_AMOUNT_OF_AGILITY;
+		} else if (agility<MIN_AMOUNT_OF_AGILITY) {
+			fighter.agility = MIN_AMOUNT_OF_AGILITY;
 		} else {
-			return false;
-		}
+			fighter.agility = agility;
+		}		
 	}
+	function setDamage(damage) {
+		if (damage>0) {
+			fighter.damage = damage;
+		} else {
+			fighter.damage = 0;
+		}	
+	}
+	fighter.name = object.name;
+	setDamage(object.damage);
+	setHealth(object.hp);
+	setAgility(object.agility);	
 	this.getName = function () {
 		return fighter.name;
 	}
@@ -58,51 +47,64 @@ function Fighter(object) {
 	this.getHealth = function () {
 		return fighter.hp;
 	}
-}
-Fighter.prototype.dealDamage = function (damage) {
-	this.setHealth(this.getHealth()-damage);
-}
-Fighter.prototype.heal = function (amountOfHP) {
-	this.setHealth(this.getHealth()+amountOfHP);
-}
-Fighter.prototype.attack = function (fighter) {
-	const PERCENTS = 100;
-	let probabilityOfSucsess = 1-fighter.getAgility()/PERCENTS;
-	if (fighter.getHealth()===0) {
-		console.log(fighter.getName()+' is Dead.');
-		console.log('battle was not happened')
-		return;
+	this.addWin = function () {
+		wins++;
 	}
-	if (probabilityOfSucsess>Math.random()) {
-		fighter.dealDamage(this.getDamage());
-		console.log(this.getName()+' make '+this.getDamage()+' damage to '+fighter.getName());
-	} else {
-		console.log(this.getName()+' attack missed')
+	this.addLose = function() {
+		losses++;
+	}
+	this.logCombatHistory = function () {
+		console.log('Name: '+this.getName()+', Wins: '+wins+', Losses: '+losses);		
+	}
+	this.dealDamage = function (damage) {
+		setHealth(this.getHealth()-damage);
+	}
+	this.heal = function (amountOfHP) {
+		setHealth(this.getHealth()+amountOfHP);
+	}
+	this.attack = function (fighter) {
+		const PERCENTS = 100;
+		let probabilityOfSucsess = 1-fighter.getAgility()/PERCENTS;
+		if (fighter.getHealth()===0) {
+			console.log(fighter.getName()+' is Dead.');
+			console.log('battle was not happened')
+			return;
+		}
+		if (probabilityOfSucsess>Math.random()) {
+			fighter.dealDamage(this.getDamage());
+			console.log(this.getName()+' make '+this.getDamage()+' damage to '+fighter.getName());
+		} else {
+			console.log(this.getName()+' attack missed')
+		}
 	}
 }
 function battle(fighter1,fighter2) {
+	if (fighter1.getHealth()===0||fighter2.getHealth()===0) {
+		console.log('battle can not occur because at least one of fighters are dead');
+		return;
+	}
 	do {
 		fighter1.attack(fighter2);
-		if(!fighter2.isAlive()) {
+		if(fighter2.getHealth()===0) {
 			fighter1.addWin()
 			fighter2.addLose()
 			return;
 		}
 		fighter2.attack(fighter1);
-		if(!fighter1.isAlive()) {
+		if(fighter1.getHealth()===0) {
 			fighter2.addWin()
 			fighter1.addLose()
 			return;
 		}
-	} while (fighter1.isAlive()&&fighter1.isAlive())
+	} while (fighter1.getHealth()!==0&&fighter2.getHealth()!==0)
 }
-let obj = {
+const obj = {
 	name: 'John', 
 	damage: 20, 
 	hp: 100,
 	agility: 25
 }
-let obj2 = {
+const obj2 = {
 	name: 'Jack', 
 	damage: 25, 
 	hp: 100,
@@ -111,6 +113,5 @@ let obj2 = {
 const john = new Fighter(obj); 
 const jack = new Fighter(obj2);
 battle(john,jack)
-
 john.logCombatHistory()
 jack.logCombatHistory()
