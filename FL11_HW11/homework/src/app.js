@@ -116,6 +116,7 @@ function dragStart(event) {
 		target = target.parentNode;
 	}
 	dragging = target;
+//	event.dataTransfer.setData('text/html', dragging);
 }
 function dragenter(event) {
 	let target = event.target;
