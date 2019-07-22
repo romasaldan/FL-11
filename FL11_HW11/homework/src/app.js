@@ -26,13 +26,6 @@ function newPontOfList(text) {
 	div.appendChild(edit)
 	list.appendChild(listItem)
 }
-function isChecked(event) {
-	let target = event.target;
-	if (target.getAttribute('type') === 'checkbox') {
-		target.setAttribute('disabled','')
-	}	
-}
-list.addEventListener('click',isChecked)
 let inputForNewItem = document.querySelector('#form-input input');
 function isEmptyInput() {
 	if (inputForNewItem.value==='') {
@@ -43,12 +36,19 @@ function isEmptyInput() {
 	}
 }
 inputForNewItem.addEventListener('change',isEmptyInput)
+function isChecked(event) {
+	let target = event.target;
+	if (target.getAttribute('type') === 'checkbox') {
+		target.setAttribute('disabled','')
+	}	
+}
+list.addEventListener('click',isChecked)
 
 //we know button is only one
 let button = document.getElementById('add-action');
 button.addEventListener('click',addNewPointOfList)
 function addNewPointOfList() {
-	//we know button is only one
+	//we know button is only one. I have to create new variable button because I do not want to chaange button in global scope 
 	let button = document.getElementById('add-action');
 	let inputText = button.previousSibling.previousSibling.value;
 	newPontOfList(inputText)
