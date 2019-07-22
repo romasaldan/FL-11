@@ -8,7 +8,7 @@ function newPontOfList(text) {
 	listItem.setAttribute('draggable','true');
 	let div = document.createElement('div')
 	div.setAttribute('class','left-part');
-	let deleteSymbol  = document.createElement('i');
+	let deleteSymbol = document.createElement('i');
 	deleteSymbol.setAttribute('class','material-icons delete');
 	deleteSymbol.innerHTML='delete';
 	listItem.appendChild(div);
@@ -26,13 +26,13 @@ function newPontOfList(text) {
 	div.appendChild(edit)
 	list.appendChild(listItem)
 }
-
 function isChecked(event) {
 	let target = event.target;
 	if (target.getAttribute('type') === 'checkbox') {
 		target.setAttribute('disabled','')
 	}	
 }
+list.addEventListener('click',isChecked)
 let inputForNewItem = document.querySelector('#form-input input');
 function isEmptyInput() {
 	if (inputForNewItem.value==='') {
@@ -47,7 +47,7 @@ inputForNewItem.addEventListener('change',isEmptyInput)
 //we know button is only one
 let button = document.getElementById('add-action');
 button.addEventListener('click',addNewPointOfList)
-function addNewPointOfList (el) {
+function addNewPointOfList() {
 	//we know button is only one
 	let button = document.getElementById('add-action');
 	let inputText = button.previousSibling.previousSibling.value;
@@ -83,6 +83,8 @@ function editAndSaveElement(event) {
 	if (target.innerHTML === 'edit') {
 		let contentSpan = target.previousSibling;
 		let buffer = contentSpan.innerHTML;
+		let checkbox = target.parentNode.firstChild;
+		checkbox.style.display = 'none';
 		target.parentNode.removeChild(contentSpan);
 		let input = document.createElement('input');
 		input.value = buffer;
@@ -94,6 +96,8 @@ function editAndSaveElement(event) {
 		let contentInput = target.previousSibling;
 		let buffer = contentInput.value;
 		target.parentNode.removeChild(contentInput);
+		let checkbox = target.parentNode.firstChild;
+		checkbox.style.display = 'block';
 		let span = document.createElement('span');
 		span.setAttribute('class','content')
 		span.innerHTML = buffer;
@@ -101,8 +105,7 @@ function editAndSaveElement(event) {
 		target.innerHTML = 'edit';	
 	}
 }
-
-
+list.addEventListener('click',editAndSaveElement)
 let dragging,dropElem;
 function allowDrop(event) {
 	event.preventDefault()
@@ -113,21 +116,19 @@ function dragStart(event) {
 		target = target.parentNode;
 	}
 	dragging = target;
-	console.log(dragging)
-	event.dataTransfer.setData('text/html', dragging);
-};
-function drop(event) {
+//	event.dataTransfer.setData('text/html', dragging);
+}
+function dragenter(event) {
 	let target = event.target;
 	while (target.tagName!=='LI') {
 		target = target.parentNode;
 	}
-    if(target.parentNode.tagName === 'UL') {
-        target.parentNode.insertBefore(dragging, target.nextSibling);
-    }
+	if (target.parentNode.lastChild === target) {
+		target.parentNode.insertBefore(dragging, target.nextSibling);
+		return
+	}
+    target.parentNode.insertBefore(dragging, target);
 }
-
-list.addEventListener('click',editAndSaveElement)
-list.addEventListener('click',isChecked)
 list.addEventListener('dragover', allowDrop)
 list.addEventListener('dragstart', dragStart)
-list.addEventListener('drop',drop)
+list.addEventListener('dragenter',dragenter)
