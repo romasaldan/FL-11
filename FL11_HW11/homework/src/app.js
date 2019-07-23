@@ -43,7 +43,6 @@ function isChecked(event) {
 	}	
 }
 list.addEventListener('click',isChecked)
-
 //we know button is only one
 let button = document.getElementById('add-action');
 button.addEventListener('click',addNewPointOfList)
@@ -116,7 +115,7 @@ function dragStart(event) {
 		target = target.parentNode;
 	}
 	dragging = target;
-//	event.dataTransfer.setData('text/html', dragging);
+	event.dataTransfer.setData('text/html', dragging);
 }
 function dragenter(event) {
 	let target = event.target;
