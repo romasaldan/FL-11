@@ -21,6 +21,13 @@ const counterOfItem = (() => {
 		amountOfItem++;
 	}
 })()
+let editedItem;
+const editedItemCounter = (() => {
+	return function (a) {
+		editedItem=a;
+		return editedItem;
+	}
+})()
 let mainPage = addElement(rootNode);
 mainPage.setAttribute('id','main');
 let buttonAdd;
@@ -124,12 +131,44 @@ let editItemInput,acceptEditing,cancelEditing;
 	let helpFunc = () => {
 		location.hash = 'main'
 	}
+	acceptEditing.addEventListener('click',modifyItem)
 	acceptEditing.addEventListener('click',helpFunc)
 	cancelEditing = addElement(buttonsFields,'button')
 	cancelEditing.setAttribute('id','cancelEditedTodo')
 	cancelEditing.innerHTML = 'Cancel';
 	cancelEditing.addEventListener('click',helpFunc)
 })();
+
+function fillUpModifyInput(ev) {
+	let target = ev.target;
+	const COLLECTIONS_OF_ITEMS = document.querySelectorAll('ul>li>span');
+	for(let i =0;i<COLLECTIONS_OF_ITEMS.length;i++) {
+		if(COLLECTIONS_OF_ITEMS[i].innerHTML===target.innerHTML) {
+			editItemInput.value = COLLECTIONS_OF_ITEMS[i].innerHTML;
+			editedItemCounter(i);
+		}
+	}
+}
+function modifyItem() {
+	todoItems[editedItem].description = editItemInput.value;
+	window.localStorage.setItem('todoItems',JSON.stringify(todoItems));
+	renderMainPage()
+}
+document.addEventListener('click',fillUpModifyInput)
+
+function deletedItem(ev) {
+	let target = ev.target;
+	const COLLECTIONS_OF_ITEMS = document.querySelectorAll('ul>li>div.delete');
+	for(let i =0;i<COLLECTIONS_OF_ITEMS.length;i++) {
+		if(COLLECTIONS_OF_ITEMS[i]===target) {
+			todoItems.splice(i,1)
+		}
+	}
+	window.localStorage.setItem('todoItems',JSON.stringify(todoItems));
+	renderMainPage()	
+}
+document.addEventListener('click',deletedItem)
+
 function hashChange() {
 	mainPage.style.display = 'none';
 	addItem.style.display = 'none';
@@ -149,13 +188,12 @@ function isEmpty(inputNode) {
 function isEqual(inputNode) {
 	for(let i=0;i<todoItems.length;i++) {
 		if(inputNode.value===todoItems[i].description){
-			window.alert(`Danger`,`you can't add already exist item`)
+			window.alert(`you can't add already exist item`)
 			location.hash = 'add-item';
 			return true;
-		} else {
-			return false;			
 		}
 	}
+	return false;
 }
 function addNewItem() {
 	let obj = {};
@@ -176,8 +214,28 @@ function addNewItem() {
 }
 acceptEntering.addEventListener('click',addNewItem)
 acceptEntering.addEventListener('click',renderMainPage)
+//checking
+function pressCheckbox(ev) {
+		if (ev.target.getAttribute('class')==='checkbox-div-done'||ev.target.getAttribute('class')==='checkbox-div') {
+		let target = ev.target.parentNode.children[1];
+		console.log(ev.target.parentNode.children[1])
+		const COLLECTIONS_OF_ITEMS = document.querySelectorAll('ul>li');
+		for(let i =0;i<COLLECTIONS_OF_ITEMS.length;i++) {
+			if(COLLECTIONS_OF_ITEMS[i].children[1].innerHTML===target.innerHTML) {
+				for (let j=0;j<COLLECTIONS_OF_ITEMS.length;j++) {
+					if (COLLECTIONS_OF_ITEMS[i].children[1].innerHTML === todoItems[j].description) {
+						todoItems[j].isDone = !todoItems[j].isDone;
+					}
+				}
+			}
+		}
+		window.localStorage.setItem('todoItems',JSON.stringify(todoItems));
+		renderMainPage()	
+	}
+}
+document.addEventListener('click',pressCheckbox)
 //user alert
-function renderUserAlert(text,descriptionMessage){
+function renderUserAlert(descriptionMessage){
 	// you required every element should be included to rootNode than this alert has written only for rootNode
 	let overElement = addElement(rootNode)
 	overElement.style.width = rootNode.offsetWidth+'px';
@@ -211,22 +269,27 @@ function renderUserAlert(text,descriptionMessage){
 	let message = addElement(messageBox)
 	messageBox.style.display = 'flex';
 	messageBox.style.justifyContent = 'space-between';	
-	message.innerHTML = text;
+	message.innerHTML = 'Danger';
 	let closeIcon = addElement(messageBox);
 	closeIcon.innerHTML = 'X';
+	closeIcon.addEventListener('click',hideAlert);
 	let description = addElement(alertBody)
 	description.innerHTML = descriptionMessage;
 }
 function hideAlert() {
 	let over = document.getElementById('over-element');
+	if(over === null ) {
+		return
+		// I use return in this place because of if we press 'X' alert.style.display = 'none' but setTimeOut launch hideAlert in 2 seconds and it can not find alert and we get error 
+	}
 	over.style.display = 'none';
 	let alertBody = document.getElementById('alert-body');
 	alertBody.style.display = 'none';
 	over.parentNode.removeChild(over)
 	alertBody.parentNode.removeChild(alertBody)
 }
-window.alert = function(text,descriptionMessage) {
-	renderUserAlert(text,descriptionMessage);
+window.alert = function(descriptionMessage) {
+	renderUserAlert(descriptionMessage);
 	let over = document.getElementById('over-element');
 	over.style.display = 'block';
 	let alertBody = document.getElementById('alert-body');
