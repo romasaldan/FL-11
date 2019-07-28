@@ -10,6 +10,10 @@ function addElement(parentNode,tag='div',before=null) {
 	parentNode.insertBefore(elem,before);
 	return elem;
 }
+function onloadPage() {
+	location.hash = 'main'
+}
+addEventListener('load',onloadPage)
 let amountOfItem;
 if (window.localStorage.getItem('amountOfItem')===null) {
 	amountOfItem = 1;
@@ -42,7 +46,6 @@ function renderList(todoItems) {
 			newItem.style.backgroundColor = '#7E807E'
 		} else {
 			checkbox.setAttribute('class','checkbox-div');
-
 		}
 		let text = addElement(newItem,'span');
 		text.onclick = function () {
@@ -150,25 +153,36 @@ function fillUpModifyInput(ev) {
 	}
 }
 function modifyItem() {
+	if(isEmpty(editItemInput)) {
+		return;
+	}
+	if(isEqual(editItemInput)) {
+		return;
+	}	
 	todoItems[editedItem].description = editItemInput.value;
+	window.localStorage.setItem('amountOfItem',amountOfItem)
 	window.localStorage.setItem('todoItems',JSON.stringify(todoItems));
 	renderMainPage()
 }
 document.addEventListener('click',fillUpModifyInput)
-
 function deletedItem(ev) {
 	let target = ev.target;
 	const COLLECTIONS_OF_ITEMS = document.querySelectorAll('ul>li>div.delete');
 	for(let i =0;i<COLLECTIONS_OF_ITEMS.length;i++) {
 		if(COLLECTIONS_OF_ITEMS[i]===target) {
-			todoItems.splice(i,1)
+			let choosenElem = target.parentNode.children[1].innerHTML
+			for(let j =0;j<todoItems.length;j++) {
+				if(todoItems[j].description === choosenElem) {
+					todoItems.splice(j,1);
+				}
+			}
 		}
 	}
+	window.localStorage.setItem('amountOfItem',amountOfItem)
 	window.localStorage.setItem('todoItems',JSON.stringify(todoItems));
 	renderMainPage()	
 }
 document.addEventListener('click',deletedItem)
-
 function hashChange() {
 	mainPage.style.display = 'none';
 	addItem.style.display = 'none';
@@ -218,7 +232,6 @@ acceptEntering.addEventListener('click',renderMainPage)
 function pressCheckbox(ev) {
 		if (ev.target.getAttribute('class')==='checkbox-div-done'||ev.target.getAttribute('class')==='checkbox-div') {
 		let target = ev.target.parentNode.children[1];
-		console.log(ev.target.parentNode.children[1])
 		const COLLECTIONS_OF_ITEMS = document.querySelectorAll('ul>li');
 		for(let i =0;i<COLLECTIONS_OF_ITEMS.length;i++) {
 			if(COLLECTIONS_OF_ITEMS[i].children[1].innerHTML===target.innerHTML) {
@@ -229,6 +242,7 @@ function pressCheckbox(ev) {
 				}
 			}
 		}
+		window.localStorage.setItem('amountOfItem',amountOfItem)	
 		window.localStorage.setItem('todoItems',JSON.stringify(todoItems));
 		renderMainPage()	
 	}

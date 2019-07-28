@@ -1,6 +1,5 @@
 /* Your styles go here */
 * {
-	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 }
 #root {
@@ -10,14 +9,8 @@
 	width: 60%;
 }
 .item {
-	display: -webkit-box;
-	display: -ms-flexbox;
 	display: flex;
-	-webkit-box-pack: justify;
-	-ms-flex-pack: justify;
 	justify-content: space-between;
-	-webkit-box-align: center;
-	-ms-flex-align: center;
 	align-items: center;
 	margin-top: 5px;
 }
