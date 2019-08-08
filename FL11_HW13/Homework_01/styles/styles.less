@@ -1,0 +1,47 @@
+@import "variables";
+h1,
+h2 {
+	color: @blue;
+}
+hr {
+	background-color: @blue;
+}
+.nav-item {
+	&>a {
+		color: @gray;
+	}
+	&:first-child {
+		background-color: @blue;
+		&>a {
+			color: white;
+		}
+	}
+}
+.color(@color) {
+	border-color: @color;
+	background-color: @color;
+}
+.related-classes__card {
+	&>a {
+		text-decoration: none;
+	}
+	&--red {
+		.color(@red)
+	}
+	&--blue {
+		.color(@blue)
+	}
+	&--orange {
+		.color(@orange)
+	}
+	&--green {
+		.color(@green)
+	}
+	& h4 {
+		font-size: 80%;
+		text-decoration: none;
+	}
+}
+footer {
+	background-color: @gray;
+}

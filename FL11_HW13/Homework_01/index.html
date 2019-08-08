@@ -4,14 +4,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/styles.less">
-	<link rel="stylesheet" href="js/less.min.js">
+    <link rel="stylesheet" href="styles/bootstrap.min.css">
+    <link rel="stylesheet/less" type="text/css" href="styles/styles.less"/>
+	<script src="js/less.min.js"></script>
     <title>Lesson 1. CSS Frameworks!</title>
   </head>
   <body>
    	<header class="bg-light">
-		<nav class="navbar navbar-light container navbar-expand-md"> 		
+		<nav class="navbar container navbar-expand-md py-0"> 		
 			<div class="navbar-brand">
 				<a href="#"><img src="img/logo.png" alt="logo"></a>
 			</div>
@@ -33,7 +33,7 @@
 			</div>		
 		</nav>
    	</header>
-   	<main>
+   	<main class="mt-3">
 		<section class="container">
 			<h1>Yoga Pilates</h1>
 			<hr>
@@ -41,10 +41,10 @@
 				<div class="col-12 col-lg-8">
 					<img class="img-fluid" src="img/yoga.jpg" alt="yoga">	
 				</div>
-				<div class="col-12 col-lg-4">
+				<div class="col-12 col-lg-4 mt-3">
 					<h2 class="col-12 p-0">Class description</h2>
 					<p>This workout uses a series of exercise routines designed to increase your core strength & improve your posture, energy, & flexibility. Pilates work is powered by breath, flow, & centering. By focusing on the mind-body connection & using more efficient form, this workout helps develop a stronger, leaner, healthier body. Appropriate for all fitness levels.</p>
-					<ul>
+					<ul class="mb-5">
 						<li>One Personal Trainer</li>
 						<li>Big gym space for training</li>
 						<li>Free tools & props</li>
@@ -54,39 +54,39 @@
 				</div>				
 			</div>
 		</section>
-  		<section class="container mt-3">
+  		<section class="container">
   			<h2>Related classes</h2>
   			<hr>
   			<div class="row mb-3">
   				<div class="col-6 col-md-3 mb-4">
-					<div class="card p-0 bg-danger  border-danger rounded-0">
+					<div class="card p-0 related-classes__card related-classes__card--red rounded-0">
 						<a href="#">
 							<img class="img-fluid" src="img/cardio-kickbox.jpg" alt="cardio-kickbox">
-							<h4 class="text-center card-text text-white align-middle py-md-2 py-1"><small><small>Cardio kickboxing</small></small></h4>
+							<h4 class="text-center card-text text-white py-3">Cardio kickboxing</h4>
 						</a>
 					</div>
 				</div>
 				<div class="col-6 col-md-3 mb-4">	
-					<div class="card p-0 bg-primary border-primary rounded-0">
+					<div class="card p-0 related-classes__card related-classes__card--blue rounded-0">
 						<a href="#">
 							<img class="img-fluid" src="img/fitness.jpg" alt="Fitness xpress">
-							<h4 class="text-center card-text text-white py-md-2 py-1"><small><small>Fitness xpress</small></small></h4>
+							<h4 class="text-center card-text text-white py-3">Fitness xpress</h4>
 						</a>
 					</div>
 				</div>
 				<div class="col-6 col-md-3 mb-4">	
-					<div class="card p-0 bg-warning border-warning rounded-0">
+					<div class="card p-0 related-classes__card related-classes__card--orange rounded-0">
 						<a href="#">
 							<img class="img-fluid" src="img/zumba.jpg" alt="Zumba">
-							<h4 class="text-center card-text text-white py-md-2 py-1"><small><small>Zumba</small></small></h4>
+							<h4 class="text-center card-text text-white py-3">Zumba</h4>
 						</a>
 					</div>
 				</div>		
 				<div class="col-6 col-md-3 mb-4">	
-					<div class="card p-0 bg-success border-success rounded-0">
+					<div class="card p-0 related-classes__card related-classes__card--green rounded-0">
 						<a href="#">
 							<img class="img-fluid" src="img/bootcamp.jpg" alt="Bootcamp">
-							<h4 class="text-center card-text text-white py-md-2 py-1"><small><small>Bootcamp</small></small></h4>
+							<h4 class="text-center card-text text-white py-3">Bootcamp</h4>
 						</a>
 					</div>	
 				</div>
@@ -94,7 +94,7 @@
   		</section>	
    	</main>
 	<footer class="text-white container">
-		<div class="bg-dark">
+		<div>
 			<div class="py-3 pl-4">
 				&#9400;Epam Front-end lab, 2019
 			</div>
