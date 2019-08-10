@@ -6,14 +6,16 @@ h2 {
 hr {
 	background-color: @blue;
 }
-.nav-item {
-	&>a {
-		color: @gray;
-	}
-	&:first-child {
-		background-color: @blue;
+.navbar-nav {
+	.nav-item {
 		&>a {
-			color: white;
+			color: @gray;
+		}
+		&:first-child {
+			background-color: @blue;
+			&>.nav-link {
+				color: white;
+			}
 		}
 	}
 }
