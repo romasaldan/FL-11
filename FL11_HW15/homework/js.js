@@ -84,3 +84,11 @@ function Hamburger(type,calories,secretIngredient) {
     return this.type+' hamburger: '+secret+cheese+tomato+bites+totalCalories;
   }  
 }
+const myHamburger = new Hamburger('classic',600);
+myHamburger.addSecretIngedient();
+myHamburger.addTomato();
+myHamburger.addCheese();
+myHamburger.bite();
+myHamburger.bite();
+myHamburger.bite();
+console.log(myHamburger.info())
