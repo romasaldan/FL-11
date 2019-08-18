@@ -47,7 +47,7 @@ function Hamburger(type,calories,secretIngredient) {
   }
   this.addTomato = function() {
     if(_amountOfBites>0) {
-      console.log(`Sorry, you can'not add tomato`)
+      console.log('Sorry, you can not add tomato')
     } else {
       const MAX_AMOUNT_OF_TOMATOES = 2
       if(_ingredients.tomato<MAX_AMOUNT_OF_TOMATOES) {
