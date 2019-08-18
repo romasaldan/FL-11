@@ -23,13 +23,13 @@ function Hamburger(type,calories,secretIngredient) {
   }
   this.type = type;
   this.getCalories = function () {
-    return calories; 
+    return _calories; 
   }
   this.setCalories = function(value) {
     if(value<0 ||typeof value!=='number') {
-      console.log('value should be number more than 0')
+      console.log('calories should be number more than 0')
     } else {
-      calories = value;
+      _calories = value;
     }
   }
   this.addCheese = function() {
@@ -76,12 +76,11 @@ function Hamburger(type,calories,secretIngredient) {
     _amountOfBites++;
   }
   this.info = function () {
-    let secret = (_ingredients.secret)?'with secret ingredient, ':'without secret ingredient, '
-    let cheese = (_ingredients.cheese)?'with cheese, ':'without cheese, '
-    let tomato = (_ingredients.tomato>1)?'with '+_ingredients.tomato+' tomatoes, ':'with '+_ingredients.tomato+ ' tomato, '
-    let bites = (_amountOfBites>1)?'is bited '+ _amountOfBites+' times.':'is bited '+ _amountOfBites+' time.'
-    let calories = 'Total calories: '+this.getCalories()+'.'
-    return this.type+' hamburger: '+secret+cheese+tomato+bites+calories;
+    let secret = _ingredients.secret?'with secret ingredient, ':'without secret ingredient, '
+    let cheese = _ingredients.cheese?'with cheese, ':'without cheese, '
+    let tomato = _ingredients.tomato>1?'with '+_ingredients.tomato+' tomatoes,':'with '+_ingredients.tomato+ ' tomato,'
+    let bites = _amountOfBites>1?' is bited '+ _amountOfBites+' times.':' is bited '+ _amountOfBites+' time.'
+    let totalCalories = 'Total calories: '+this.getCalories()+'.'
+    return this.type+' hamburger: '+secret+cheese+tomato+bites+totalCalories;
   }  
 }
-const myHamb = new Hamburger('classic',600)
