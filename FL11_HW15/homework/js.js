@@ -79,7 +79,7 @@ function Hamburger(type,calories,secretIngredient) {
     let secret = _ingredients.secret?'with secret ingredient, ':'without secret ingredient, '
     let cheese = _ingredients.cheese?'with cheese, ':'without cheese, '
     let tomato = _ingredients.tomato>1?'with '+_ingredients.tomato+' tomatoes,':'with '+_ingredients.tomato+ ' tomato,'
-    let bites = _amountOfBites>1?' is bited '+ _amountOfBites+' times.':' is bited '+ _amountOfBites+' time.'
+    let bites = _amountOfBites>1?' is bitten '+ _amountOfBites+' times.':' is bitten '+ _amountOfBites+' time.'
     let totalCalories = 'Total calories: '+this.getCalories()+'.'
     return this.type+' hamburger: '+secret+cheese+tomato+bites+totalCalories;
   }  
