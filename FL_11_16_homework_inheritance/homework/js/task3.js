@@ -1,3 +1,12 @@
+function inherit(object,proto) {
+	if(typeof object==='function'&&typeof proto === 'function') {
+		object.prototype = Object.create(proto.prototype);
+		object.prototype.constructor = object;
+	} else {
+		console.log('object and proto should be constuctor');
+		return
+	}
+}
 function Pokemon (type,canFly,specie) {
 	this._type = type;
 	if(typeof canFly ==='boolean') {
@@ -14,7 +23,7 @@ Pokemon.prototype.getType = function() {
 Pokemon.prototype.getSpecie = function() {
 	return this._specie;
 }
-Pokemon.prototype.Canfly = function() {
+Pokemon.prototype.canfly = function() {
 	return this._canFly;
 }
 Pokemon.prototype.getPokemonType = function () {
@@ -23,50 +32,46 @@ Pokemon.prototype.getPokemonType = function () {
 function Charmander() {
 	Pokemon.call(this,'Fire',false,'Lizard Pokémon');
 }
-Charmander.prototype = Object.create(Pokemon.prototype)
-Charmander.prototype.constructor = Charmander;
+inherit(Charmander,Pokemon)
 Charmander.prototype.evolve = function () {
 	return new Charmeleon()
 }
 function Charmeleon() {
-	Pokemon.call(this,'Fire',false,'Flame Pokémon');
+	Charmander.call(this);
+	this._specie = 'Flame Pokémon';
 }
-Charmeleon.prototype = Object.create(Pokemon.prototype)
-Charmeleon.prototype.constructor = Charmeleon;
+inherit(Charmeleon,Charmander)
 Charmeleon.prototype.evolve = function () {
 	return new Charizard()
 }
 function Charizard() {
-	Pokemon.call(this,'Fire',true,'Flame Pokémon');
+	Charmeleon.call(this);
+	this._canFly = true;
 }
-Charizard.prototype = Object.create(Pokemon.prototype)
-Charizard.prototype.constructor = Charizard;
+inherit(Charizard,Charmeleon)
 Charizard.prototype.evolve = function() {
-	return new Charizard();
+	return this;
 }
 function Pichu() {
 	Pokemon.call(this,'Electric',false,'Mouse Pokémon')
 }
-Pichu.prototype = Object.create(Pokemon.prototype)
-Pichu.prototype.constructor = Pichu;
+inherit(Pichu,Pokemon)
 Pichu.prototype.evolve = function () {
 	return new Pikachu()
 }
 function Pikachu() {
-	Pokemon.call(this,'Electric',false,'Mouse Pokémon')
+	Pichu.call(this)
 }
-Pikachu.prototype = Object.create(Pokemon.prototype)
-Pikachu.prototype.constructor = Pikachu;
+inherit(Pikachu,Pichu)
 Pikachu.prototype.evolve = function () {
 	return new Raichu()
 }
 function Raichu() {
-	Pokemon.call(this,'Electric',false,'Mouse Pokémon')
+	Pikachu.call(this)
 }
-Raichu.prototype = Object.create(Pokemon.prototype)
-Raichu.prototype.constructor = Raichu;
+inherit(Raichu,Pikachu)
 Raichu.prototype.evolve = function () {
-	return new Raichu()
+	return this
 }
-const pok = new Charizard()
+const pok = new Raichu()
 console.log(pok)
