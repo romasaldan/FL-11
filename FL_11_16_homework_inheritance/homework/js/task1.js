@@ -8,4 +8,3 @@ function assign(target,...rest) {
 	}
 	return target;
 }
-//console.log(assign({},{f:3},4,'abc',{a:2,f:1}))
