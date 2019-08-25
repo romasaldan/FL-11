@@ -87,9 +87,8 @@ function getNames() {
     .catch(error=>console.log(error))
 }
 getNames()
-
 // №9
-async function rewrittenGetNames () {
+function rewrittenGetNames () {
     try {
         const users = (async ()=>{
             const request = await fetch('https://jsonplaceholder.typicode.com/users')
