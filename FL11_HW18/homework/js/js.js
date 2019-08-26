@@ -116,51 +116,51 @@ function editName(event) {
         function sendEditRequest() {
             usersData[index].name = input.value;
             showSpinner();
-            // const p = new Promise((resolve,reject)=>{
-            //     let xhttp = new XMLHttpRequest();
-            //     xhttp.open('PUT','https://jsonplaceholder.typicode.com/users/'+(index+1))
-            //     xhttp.setRequestHeader('Content-type','application/json; charset=UTF-8');
-            //     xhttp.responseType = 'json'
-            //     xhttp.send(JSON.stringify(usersData[index]))
-            //     xhttp.onload = ()=> {
-            //         if(xhttp.status === 200) {
-            //             resolve(xhttp.response)
+            const p = new Promise((resolve,reject)=>{
+                let xhttp = new XMLHttpRequest();
+                xhttp.open('PUT','https://jsonplaceholder.typicode.com/users/'+(index+1))
+                xhttp.setRequestHeader('Content-type','application/json; charset=UTF-8');
+                xhttp.responseType = 'json'
+                xhttp.send(JSON.stringify(usersData[index]))
+                xhttp.onload = ()=> {
+                    if(xhttp.status === 200) {
+                        resolve(xhttp.response)
                         
-            //         } else {
-            //             reject('Error' + xhttp.status)
-            //         }
-            //     }
-            // })           
-            // .then((response) => {
-            //     renovateItemsOfList.call(saveButton)
-            //     console.log(response)
-            //     hideSpinner()
-            // })
-            // .catch((error)=>{
-            //     hideSpinner();
-            //     alert(error)
-            //     renovateItemsOfList.call(saveButton,false)
-            // });
-            fetch('https://jsonplaceholder.typicode.com/users/'+(index+1), {
-                method: 'PUT',
-                body: JSON.stringify(usersData[index]),
-                headers: {
-                "Content-type": "application/json; charset=UTF-8"
+                    } else {
+                        reject('Error' + xhttp.status)
+                    }
                 }
-            })
+            })           
             .then((response) => {
                 renovateItemsOfList.call(saveButton)
-                return response.json()
-            })
-            .then((json) => {
-                console.log(json)
+                console.log(response)
                 hideSpinner()
             })
-            .catch(()=>{
+            .catch((error)=>{
                 hideSpinner();
-                alert('error')
-                renovateItemsOfList(false)
-            })
+                alert(error)
+                renovateItemsOfList.call(saveButton,false)
+            });
+            // fetch('https://jsonplaceholder.typicode.com/users/'+(index+1), {
+            //     method: 'PUT',
+            //     body: JSON.stringify(usersData[index]),
+            //     headers: {
+            //     "Content-type": "application/json; charset=UTF-8"
+            //     }
+            // })
+            // .then((response) => {
+            //     renovateItemsOfList.call(saveButton)
+            //     return response.json()
+            // })
+            // .then((json) => {
+            //     console.log(json)
+            //     hideSpinner()
+            // })
+            // .catch(()=>{
+            //     hideSpinner();
+            //     alert('error')
+            //     renovateItemsOfList(false)
+            // })
         }
         function renovateItemsOfList(succsess=true) {
             event.target.display = 'block';
@@ -190,42 +190,41 @@ function deleteItem(event) {
                 index = i;
             }
         }    
-        // const p = new Promise((resolve,reject)=>{
-        //     showSpinner();
-        //     let xhttp = new XMLHttpRequest();
-        //     xhttp.open('DELETE','https://jsonplaceholder.typicode.com/users/'+(index+1))
-        //     xhttp.setRequestHeader('Content-type','application/json; charset=UTF-8');
-        //     xhttp.responseType = 'json';
-        //     xhttp.send()
-        //     xhttp.onload = () => {
-        //         if(xhttp.status === 200) {
-        //             resolve(xhttp.response)
-        //         } else {
-        //             reject('Error' + xhttp.status)
-        //         }
-        //     }
+        const p = new Promise((resolve,reject)=>{
+            showSpinner();
+            let xhttp = new XMLHttpRequest();
+            xhttp.open('DELETE','https://jsonplaceholder.typicode.com/users/'+(index+1))
+            xhttp.setRequestHeader('Content-type','application/json; charset=UTF-8');
+            xhttp.responseType = 'json';
+            xhttp.send()
+            xhttp.onload = () => {
+                if(xhttp.status === 200) {
+                    resolve(xhttp.response)
+                } else {
+                    reject('Error' + xhttp.status)
+                }
+            }
+        })
+        .then((json)=>{
+            event.target.parentNode.parentNode.removeChild(event.target.parentNode)
+            console.log(json)
+        })
+        .catch((error)=>{
+            console.log(error)
+        })
+        .finally(hideSpinner)        
+
+        // fetch('https://jsonplaceholder.typicode.com/users/'+(index+1), {
+        //     method: 'DELETE'
         // })
-        // .then((json)=>{
+        // .then(()=>{
         //     event.target.parentNode.parentNode.removeChild(event.target.parentNode)
-        //     console.log(json)
         //     hideSpinner()
         // })
         // .catch((error)=>{
         //     hideSpinner()
         //     console.log(error)
-        // })        
-
-        fetch('https://jsonplaceholder.typicode.com/users/'+(index+1), {
-            method: 'DELETE'
-        })
-        .then(()=>{
-            event.target.parentNode.parentNode.removeChild(event.target.parentNode)
-            hideSpinner()
-        })
-        .catch((error)=>{
-            hideSpinner()
-            console.log(error)
-        })
+        // })
     }
 }
 rootNode.addEventListener('click',deleteItem)
@@ -258,7 +257,6 @@ function createPost(post,comments,author) {
 }
 // show post and comments
 function showPostsAndComment(event) {
-    
     const arrOfClasses = event.target.className.split(' ');
     let isName=(()=>{
         for (let i = 0; i < arrOfClasses.length; i++) {
@@ -268,7 +266,7 @@ function showPostsAndComment(event) {
         }
         return false;
     })()
-    if(isName) {
+    if(checkClass(event.target,'name')) {
         function togglePage() {
             if(checkClass(rootNode,'showElement')) {
                 toggleClass(rootNodeForPosts,'hideElement','showElement')
@@ -291,26 +289,74 @@ function showPostsAndComment(event) {
                 index = i;
             }
         }
-        fetch('https://jsonplaceholder.typicode.com/posts?userId='+(index+1))
-        .then((response) => {
-            showSpinner()
-            return response.json()})
-        .then((json) =>{
-            console.log(json)
-            for (let i = 0; i < json.length; i++) {
-                fetch('https://jsonplaceholder.typicode.com/comments?postId='+(i+1))
-                .then(response => response.json())
-                .then((jsonComments) => {
-                    createPost(json[i],jsonComments,usersData[index].name)
-                })   
+        showSpinner();
+        const p = new Promise((resolve,reject)=> {
+            const xhttp = new XMLHttpRequest();
+            xhttp.open('GET','https://jsonplaceholder.typicode.com/posts?userId='+(index+1))
+            xhttp.setRequestHeader('Content-type','application/json; charset=UTF-8');
+            xhttp.responseType = 'json';
+            xhttp.send()
+            xhttp.onload = () => {
+                if(xhttp.status === 200) {
+                    resolve(xhttp.response)
+                } else {
+                    reject('Error' + xhttp.status)
+                }
+            }
+        }).then((posts)=> {
+            for (let i = 0; i < posts.length; i++) {
+                const innerP = new Promise((resolve,reject) => {
+                    const innerXhttp = new XMLHttpRequest()
+                    innerXhttp.open('GET','https://jsonplaceholder.typicode.com/comments?postId='+(i+1))
+                    innerXhttp.setRequestHeader('Content-type','application/json; charset=UTF-8');
+                    innerXhttp.responseType = 'json';
+                    innerXhttp.send() 
+                    innerXhttp.onload = () => {
+                        if(innerXhttp.status === 200) {
+                            resolve(innerXhttp.response)
+                        } else {
+                            reject('Error' + innerXhttp.status)
+                        }
+                    }                                       
+                })
+                .then((comments)=>{
+                    createPost(posts[i],comments,usersData[index].name)
+                })
+                .catch((error)=> {
+                    console.log('can not download comments '+ error)
+                })
             }
         })
-        .catch((error)=>{
-            console.log(error)
+        .catch((error)=> {
+            console.log('can not download posts '+ error)
+            hideSpinner()
         })
         .finally(()=>{
-            hideSpinner();
-        })   
+            hideSpinner()
+        }) 
+
+
+
+        // fetch('https://jsonplaceholder.typicode.com/posts?userId='+(index+1))
+        // .then((response) => {
+        //     showSpinner()
+        //     return response.json()})
+        // .then((json) =>{
+        //     console.log(json)
+        //     for (let i = 0; i < json.length; i++) {
+        //         fetch('https://jsonplaceholder.typicode.com/comments?postId='+(i+1))
+        //         .then(response => response.json())
+        //         .then((jsonComments) => {
+        //             createPost(json[i],jsonComments,usersData[index].name)
+        //         })   
+        //     }
+        // })
+        // .catch((error)=>{
+        //     console.log(error)
+        // })
+        // .finally(()=>{
+        //     hideSpinner();
+        // })   
     }
 }
 rootNode.addEventListener('click',showPostsAndComment)
