@@ -1,0 +1,110 @@
+* {
+    box-sizing: border-box;
+  }
+.p-1 {
+    padding: 1%;
+}
+.hideElement {
+    display: none;
+}
+.showElement {
+    display: block;
+}
+/* module list  */
+.list {
+    list-style-type: none;
+}
+.row {
+    display: flex;
+    align-items: center;
+}
+.row:nth-child(odd) {
+    background-color: lightgray;
+}
+.user-elem {
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-content: center
+}
+.logo {
+    flex-basis: 100px;
+    padding: 2%;
+} 
+.name {
+    flex-basis: auto;
+    height:100%;
+}
+.hoverButton {
+    visibility: hidden;
+    flex-basis: auto;
+    height: 100%;
+    margin-left: 10px;
+}
+.row:hover .hoverButton {
+    visibility: visible;
+}
+.delete {
+    color: red;
+}
+.edit {
+    color: blue;
+}
+
+/* spinner */
+#spinner {
+    display: none;
+    width: 40px;
+    height: 40px;
+    border: 2px solid gray;
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 1s linear infinite;
+    position: fixed;
+    bottom: 2%;
+    right: 2%;
+}
+  
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* posts */
+.post {
+    padding: 5%;
+    width: 80%;
+    background-color: rgb(228, 228, 228);
+    overflow: hidden;   
+    margin: 40px;
+}
+.post-author{
+    text-align: center;
+    font-weight: 900;
+    font-size: 18px;
+}
+.post-description {
+    text-align: center;
+    font-style: italic;
+    font-weight: 500;
+}
+.post-content {
+    text-indent: 10px;
+}
+.post-comment {
+    background-color: rgb(187, 186, 186);
+    padding: 2%;
+}
+.post-comment-author {
+    text-indent: 10%;
+    font-weight: 900;
+    color: rgb(96, 75, 104);
+}
+.post-comment-content {
+    font-style: oblique;
+}
+.post-comment-description {
+    font-style: italic;
+    font-weight: 500;
+    text-indent: 20px;
+}
