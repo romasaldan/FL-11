@@ -165,6 +165,7 @@ function deleteItem(event) {
                 index = i;
             }
         }    
+        showSpinner()
         fetch('https://jsonplaceholder.typicode.com/users/'+(index+1), {
             method: 'DELETE'
         })
