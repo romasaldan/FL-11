@@ -1,6 +1,5 @@
 const rootNode = document.getElementById('root');
-const rootNodeForPosts = document.getElementById('root-for-posts') ;
-
+const rootNodeForPosts = document.getElementById('root-for-posts');
 function addElement(parentNode,tag='div',before=null) {
 	let elem = document.createElement(tag);
 	parentNode.insertBefore(elem,before);
@@ -24,7 +23,6 @@ function toggleClass(element,classOff,classOn) {
     }
     element.className = classList.join(' ')    
 }
-
 const usersData = [];
 async function addCats(where) {    
     const listOfcats = await fetch('https://api.thecatapi.com/v1/images/search',{
@@ -76,15 +74,15 @@ function renderList() {
             deleteElement.innerHTML = 'Delete';
             deleteElement.setAttribute('class','user-elem hoverButton delete')     
         }
-        hideSpinner()
     })
     .catch((error)=>{
-        hideSpinner()
         console.log(error)
+    })
+    .finally(()=>{
+        hideSpinner()
     })
 }
 renderList()
-
 // spinner    
 function showSpinner() {
     const spinner = document.getElementById('spinner')
@@ -116,51 +114,28 @@ function editName(event) {
         function sendEditRequest() {
             usersData[index].name = input.value;
             showSpinner();
-            const p = new Promise((resolve,reject)=>{
-                let xhttp = new XMLHttpRequest();
-                xhttp.open('PUT','https://jsonplaceholder.typicode.com/users/'+(index+1))
-                xhttp.setRequestHeader('Content-type','application/json; charset=UTF-8');
-                xhttp.responseType = 'json'
-                xhttp.send(JSON.stringify(usersData[index]))
-                xhttp.onload = ()=> {
-                    if(xhttp.status === 200) {
-                        resolve(xhttp.response)
-                        
-                    } else {
-                        reject('Error' + xhttp.status)
-                    }
+            fetch('https://jsonplaceholder.typicode.com/users/'+(index+1), {
+                method: 'PUT',
+                body: JSON.stringify(usersData[index]),
+                headers: {
+                "Content-type": "application/json; charset=UTF-8"
                 }
-            })           
+            })
             .then((response) => {
                 renovateItemsOfList.call(saveButton)
-                console.log(response)
-                hideSpinner()
+                return response.json()
             })
-            .catch((error)=>{
-                hideSpinner();
-                alert(error)
+            .then((json) => {
+                console.log(json)
+            })
+            .catch(()=>{
+                
+                alert('error')
                 renovateItemsOfList.call(saveButton,false)
-            });
-            // fetch('https://jsonplaceholder.typicode.com/users/'+(index+1), {
-            //     method: 'PUT',
-            //     body: JSON.stringify(usersData[index]),
-            //     headers: {
-            //     "Content-type": "application/json; charset=UTF-8"
-            //     }
-            // })
-            // .then((response) => {
-            //     renovateItemsOfList.call(saveButton)
-            //     return response.json()
-            // })
-            // .then((json) => {
-            //     console.log(json)
-            //     hideSpinner()
-            // })
-            // .catch(()=>{
-            //     hideSpinner();
-            //     alert('error')
-            //     renovateItemsOfList(false)
-            // })
+            })
+            .finally(()=>{
+                hideSpinner();
+            })
         }
         function renovateItemsOfList(succsess=true) {
             event.target.display = 'block';
@@ -190,41 +165,18 @@ function deleteItem(event) {
                 index = i;
             }
         }    
-        const p = new Promise((resolve,reject)=>{
-            showSpinner();
-            let xhttp = new XMLHttpRequest();
-            xhttp.open('DELETE','https://jsonplaceholder.typicode.com/users/'+(index+1))
-            xhttp.setRequestHeader('Content-type','application/json; charset=UTF-8');
-            xhttp.responseType = 'json';
-            xhttp.send()
-            xhttp.onload = () => {
-                if(xhttp.status === 200) {
-                    resolve(xhttp.response)
-                } else {
-                    reject('Error' + xhttp.status)
-                }
-            }
+        fetch('https://jsonplaceholder.typicode.com/users/'+(index+1), {
+            method: 'DELETE'
         })
-        .then((json)=>{
+        .then(()=>{
             event.target.parentNode.parentNode.removeChild(event.target.parentNode)
-            console.log(json)
         })
         .catch((error)=>{
             console.log(error)
         })
-        .finally(hideSpinner)        
-
-        // fetch('https://jsonplaceholder.typicode.com/users/'+(index+1), {
-        //     method: 'DELETE'
-        // })
-        // .then(()=>{
-        //     event.target.parentNode.parentNode.removeChild(event.target.parentNode)
-        //     hideSpinner()
-        // })
-        // .catch((error)=>{
-        //     hideSpinner()
-        //     console.log(error)
-        // })
+        .finally(()=> {
+            hideSpinner()
+        })
     }
 }
 rootNode.addEventListener('click',deleteItem)
@@ -233,130 +185,77 @@ function createPost(post,comments,author) {
     const postParent = addElement(parent)    
     postParent.setAttribute('class','post')
     const postAuthor = addElement(postParent)
-    postAuthor.setAttribute('class','post-author')
+    postAuthor.setAttribute('class','post__author')
     postAuthor.innerHTML = author;
     const postDescription = addElement(postParent)
-    postDescription.setAttribute('class','post-description')
+    postDescription.setAttribute('class','post__description')
     postDescription.innerHTML = post.title;
     const postContent = addElement(postParent)
-    postContent.setAttribute('class','post-content')
+    postContent.setAttribute('class','post__content')
     postContent.innerHTML = post.body;
     for (let i = 0; i < comments.length; i++) {
         const bodyOfComment =  addElement(postParent)
         bodyOfComment.setAttribute('class','post-comment')
         const commentAuthor = addElement(bodyOfComment)
-        commentAuthor.setAttribute('class','post-comment-author')
+        commentAuthor.setAttribute('class','post-comment__author')
         commentAuthor.innerHTML = comments[i].email;
         const commmentDescription = addElement(bodyOfComment)
-        commmentDescription.setAttribute('class','post-comment-description')
+        commmentDescription.setAttribute('class','post-comment__description')
         commmentDescription.innerHTML = comments[i].name;
         const commentContent = addElement(bodyOfComment)
-        commentContent.setAttribute('class','post-comment-content')
+        commentContent.setAttribute('class','post-comment__content')
         commentContent.innerHTML = comments[i].body;        
     }
 }
 // show post and comments
 function showPostsAndComment(event) {
-    const arrOfClasses = event.target.className.split(' ');
-    let isName=(()=>{
-        for (let i = 0; i < arrOfClasses.length; i++) {
-            if (arrOfClasses[i] === 'name') {
-                return true;
-            }
-        }
-        return false;
-    })()
     if(checkClass(event.target,'name')) {
-        function togglePage() {
-            if(checkClass(rootNode,'showElement')) {
-                toggleClass(rootNodeForPosts,'hideElement','showElement')
-                toggleClass(rootNode,'showElement','hideElement')
-            } else {
-                toggleClass(rootNode,'hideElement','showElement')
-                toggleClass(rootNodeForPosts,'showElement','hideElement')
-                button.parentNode.removeChild(button)              
-            }     
-        }
-        togglePage()
         rootNodeForPosts.innerHTML = '';
         const button = addElement(rootNodeForPosts,'button');
         button.innerHTML = 'Back to Userlist';
-        button.addEventListener('click',togglePage)        
+        button.addEventListener('click',()=>{
+            window.location.hash = 'main'
+        })        
         const choosenName = event.target.innerHTML;
         let index = 0;
         for (let i = 0; i < usersData.length; i++) {    
             if(usersData[i].name === choosenName) {
                 index = i;
+                break;
             }
         }
-        showSpinner();
-        const p = new Promise((resolve,reject)=> {
-            const xhttp = new XMLHttpRequest();
-            xhttp.open('GET','https://jsonplaceholder.typicode.com/posts?userId='+(index+1))
-            xhttp.setRequestHeader('Content-type','application/json; charset=UTF-8');
-            xhttp.responseType = 'json';
-            xhttp.send()
-            xhttp.onload = () => {
-                if(xhttp.status === 200) {
-                    resolve(xhttp.response)
-                } else {
-                    reject('Error' + xhttp.status)
-                }
-            }
-        }).then((posts)=> {
-            for (let i = 0; i < posts.length; i++) {
-                const innerP = new Promise((resolve,reject) => {
-                    const innerXhttp = new XMLHttpRequest()
-                    innerXhttp.open('GET','https://jsonplaceholder.typicode.com/comments?postId='+(i+1))
-                    innerXhttp.setRequestHeader('Content-type','application/json; charset=UTF-8');
-                    innerXhttp.responseType = 'json';
-                    innerXhttp.send() 
-                    innerXhttp.onload = () => {
-                        if(innerXhttp.status === 200) {
-                            resolve(innerXhttp.response)
-                        } else {
-                            reject('Error' + innerXhttp.status)
-                        }
-                    }                                       
-                })
-                .then((comments)=>{
-                    createPost(posts[i],comments,usersData[index].name)
-                })
-                .catch((error)=> {
-                    console.log('can not download comments '+ error)
-                })
+        window.location.hash = usersData[index].name;
+        fetch('https://jsonplaceholder.typicode.com/posts?userId='+(index+1))
+        .then((response) => {
+            showSpinner()
+            return response.json()})
+        .then((json) =>{
+            console.log(json)
+            for (let i = 0; i < json.length; i++) {
+                fetch('https://jsonplaceholder.typicode.com/comments?postId='+(i+1))
+                .then(response => response.json())
+                .then((jsonComments) => {
+                    createPost(json[i],jsonComments,usersData[index].name)
+                })   
             }
         })
-        .catch((error)=> {
-            console.log('can not download posts '+ error)
-            hideSpinner()
+        .catch((error)=>{
+            console.log(error)
         })
         .finally(()=>{
-            hideSpinner()
-        }) 
-
-
-
-        // fetch('https://jsonplaceholder.typicode.com/posts?userId='+(index+1))
-        // .then((response) => {
-        //     showSpinner()
-        //     return response.json()})
-        // .then((json) =>{
-        //     console.log(json)
-        //     for (let i = 0; i < json.length; i++) {
-        //         fetch('https://jsonplaceholder.typicode.com/comments?postId='+(i+1))
-        //         .then(response => response.json())
-        //         .then((jsonComments) => {
-        //             createPost(json[i],jsonComments,usersData[index].name)
-        //         })   
-        //     }
-        // })
-        // .catch((error)=>{
-        //     console.log(error)
-        // })
-        // .finally(()=>{
-        //     hideSpinner();
-        // })   
+            hideSpinner();
+        })   
     }
 }
 rootNode.addEventListener('click',showPostsAndComment)
+// for toggling pages
+function hashChange() {
+	rootNode.style.display = 'none';
+    rootNodeForPosts.style.display = 'none';
+    if( window.location.hash !=='#' && window.location.hash!=='#main') {
+        rootNodeForPosts.style.display = 'block';
+    } else {
+        rootNode.style.display = 'block'
+    }
+}
+window.addEventListener('hashchange',hashChange)
