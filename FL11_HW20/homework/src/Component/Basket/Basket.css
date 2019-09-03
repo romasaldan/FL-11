@@ -1,0 +1,14 @@
+/*
+ * Basket css File
+*/
+
+.Basket {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(to bottom,rgb(152, 152, 248),white);
+}
+.Basket-header {
+    font-size: 1.5rem;
+}

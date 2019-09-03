@@ -1,0 +1,18 @@
+
+.Button {
+    background-color: rgb(104, 90, 228);
+    padding: 10px;
+    color: white;
+    border: 0px;
+    border-radius: 5px;
+    width: 75%;
+}
+.Button_bought{
+
+    padding: 10px;
+    color: white;
+    border: 0px;
+    border-radius: 5px;
+    width: 75%;    
+    background-color: gray;
+}

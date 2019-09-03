@@ -1,0 +1,23 @@
+/*
+ * NewPack css File
+*/
+
+.NewPack {
+ 
+    background: linear-gradient(to bottom,rgb(152, 152, 248),white)
+}
+.NewPack__CharContainer{
+    color: rgb(255, 136, 0);
+    font-size: 1.8rem;
+}
+
+
+.NewPack__ButtonContainer {
+    float: right;
+    width: 150px;
+    display: flex;
+    
+}
+.NewPack__header {
+    margin-top: 0px;
+}

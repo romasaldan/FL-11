@@ -1,0 +1,9 @@
+.App {
+  display: flex;
+}
+.App-left {
+  width: 60%;
+}
+.App-right {
+  width: 40%;
+}
