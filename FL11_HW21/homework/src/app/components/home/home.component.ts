@@ -11,16 +11,16 @@ export class HomeComponent implements OnInit {
   @Input() outToParent;
   @Input() toFilterList;
   @Output() public outToGrandParent = new EventEmitter();
-
   public arrayOfSources = [];
   public arrayOfNews = [];
-  public arrayOfFilteredNews = [];
+  public arrayOfFilteredNews= [];
   public choosenType:string = "";
   public searchStr:string  = ""
   constructor(private SourceService:SourceService,private SourceListService:SourceListService) {
     this.arrayOfNews = SourceService.news;
-    this.arrayOfSources.push('all')
+    
     this.arrayOfSources = [...SourceListService.sourceList];
+    this.arrayOfSources.unshift('all')
   }
   ngOnInit():void {
     this.arrayOfFilteredNews = [...this.arrayOfNews]; 
@@ -28,7 +28,6 @@ export class HomeComponent implements OnInit {
   getString(event):void {
     this.searchStr = event;
   }
-
   receiveFromChild(evnt):void{
     this.choosenType = evnt.value.toLowerCase();
     this.arrayOfFilteredNews = [];

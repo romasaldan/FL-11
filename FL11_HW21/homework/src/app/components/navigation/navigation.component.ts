@@ -11,29 +11,24 @@ import { from } from 'rxjs';
 
 })
 export class NavigationComponent implements OnInit {
-  public title = 'My news';
-  public arrayOfSources = [];
+  public title:string = 'My news';
+  public arrayOfSources:Array<object> = [];
   @Input() public inFromParent: string;
   @Input() public searchStr:string;
 
   @Output() public outToParent = new EventEmitter();
   @Output() public toFilterList = new EventEmitter();
-  
   constructor(private SourceListService:SourceListService) {
     this.arrayOfSources = [...SourceListService.sourceList];
-    this.arrayOfSources.push({name:'all'})
+    this.arrayOfSources.unshift({name:'all'})
   }
   ngOnInit() {
-
   }
-
-  sendToParent(event) {
+  sendToParent(event):void {
     this.outToParent.emit(event.target);
-
     this.title = event.target.value;
   }
-  
-  startSearch() {
+  startSearch():void {
     this.toFilterList.emit(this.searchStr)
   }
 }
