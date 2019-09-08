@@ -1,0 +1,22 @@
+<h1 class="header">
+    {{passedObject.category}}
+ </h1>
+<div class="article">
+    <div class="article-column-left">
+        <img class="article-column-left__image" src="{{passedObject.urlImage}}" alt="{{passedObject.name}}">
+    </div>
+    <div class="article-column-right">
+        <h2 class="article-column-right__heading">
+            {{passedObject.name}}
+        </h2>
+        <p class="article-column-right__content">
+            {{passedObject.content}}
+        </p>
+
+        <time>{{passedObject.date}}</time>
+        <p class="article-column-right__author">
+            {{passedObject.author}}
+        </p>
+        <button class="article-column-right__button" routerLink='/home'>Back to home Page</button>        
+    </div>
+</div>

@@ -1,0 +1,18 @@
+<div class="article-description">
+    <div class="article-description__image">
+        <img src="{{choosenObject.urlImage}}" alt="{{choosenObject.name}}">
+    </div>
+    <div class="article-description__short">
+        <div class="article-description__short__name">{{choosenObject.name}}</div>
+        <div class="article-description__short__content">{{choosenObject.description}}</div>
+        <div class="article-description__short__more"> <a routerLink='/article' [state]=[choosenObject]>Read more</a></div>
+        <!-- "['detail',product.productID]""article/:{{choosenObject.name}}" -->
+        <!-- [state]="{ id:1 , name:'Angular'}" -->
+    </div>
+    <div class="article-description__details">
+        <div class="article-description__details__author">{{choosenObject.author}}</div>
+        <div class="article-description__details__date">{{choosenObject.date}}</div>
+    </div>
+    
+</div>
+    
