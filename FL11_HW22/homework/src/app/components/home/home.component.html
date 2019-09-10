@@ -1,0 +1,3 @@
+<app-navigation (outToParent)="receiveFromChild($event)"  (toFilterList)="getString($event)"></app-navigation>
+<app-content *ngFor="let prop of arrayOfFilteredNews | search:searchStr"
+[choosenObject]='prop'></app-content>

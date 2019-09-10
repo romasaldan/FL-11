@@ -1,0 +1,18 @@
+<h1 class="header">
+    {{title}}
+ </h1>
+<nav class="navigation">
+  
+    <select id="toggler" (change)="sendToParent($event)">
+      Select source
+        <option
+        *ngFor="let person of arrayOfSources"             
+        >{{person.name}}</option>
+
+    </select>
+    <div class="filter-box">
+      <input placeholder="Type your text" [(ngModel)]="searchStr">
+      <button (click)='startSearch()'>Filter</button>
+    </div>
+    <button routerLink="/create"><a  class="router-link" >Add article</a></button>
+  </nav>
