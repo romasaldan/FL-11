@@ -1,0 +1,17 @@
+.result-header,
+.result-score {
+  text-align: center;
+}
+.result-header {
+  font-size: 1.3rem;
+}
+.result-image {
+  width: 100%;
+  & img {
+    width: 100%;
+  }
+  &__image {
+    height: 300px;
+    width: 300px;
+  }
+}

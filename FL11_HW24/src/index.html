@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <div id="root">
+            <h1 class="game-names">Rock, Paper, or Scissors</h1>
+            <div id="main-page" class="page">
+                
+                <div class="rules">
+                    <h2 class="rules-header">Rules</h2>
+                    <div class="rules-description">
+                            Scissors beats a paper,
+                            Paper beats rock,
+                            Rock beats scissors.
+                            And we play up to three wins!                            
+                    </div>
+                </div>
+                <div class="page-button"><a href="#game-process">Click to play</a></div>
+            </div>
+            <div id="game-process" class="page" style="display: none">
+                <div class="game-block">
+                   <div class="page-button"><a href="#main-page">Reset and go to main page</a></div>
+                    <div class="game-block__choose">
+                        Please do your bet.
+                    </div>
+                    <div class="game-block-bets">
+                        <div class="game-block-bets__bet"><img class="bet-image" src="images/paper.jpg" alt="paper"></div>
+                        <div class="game-block-bets__bet"><img class="bet-image" src="images/rock.jpg" alt="rock"></div>
+                        <div class="game-block-bets__bet"><img class="bet-image" src="images/scissors.jpg" alt="scissors"></div>
+                    </div>
+                    <div class="choosen-bets">
+                        <div class="choosen-bets__result"><img src="images/paper.jpg" alt="paper"></div>
+                        <div class="choosen-bets__result">VS</div>
+                        <div class="choosen-bets__result"><img src="images/paper.jpg" alt="paper"></div>
+                    </div>
+                    <div class="score">
+                        
+                        You <span id="user-score">0</span> : <span id="computer-score">0</span> Computer  
+                    </div>
+                </div>
+            </div>
+            <div id="result" class="page" style="display: none">
+                <div class="result-header">Congratulation! You win!</div>
+                <div class="result-score">Score is</div>
+                <div class="page-button"><a href="#main-page">Go to main page</a></div>
+                <div class="result-image"></div>
+
+            </div>
+        </div>
+
+    </body>
+</html>
